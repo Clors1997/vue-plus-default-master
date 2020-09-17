@@ -1,11 +1,16 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+import ApiService from './ApiService'
+import CachePageService from './CachePageService'
+import Menu from './Menu'
+
+Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-});
+  modules: {
+    ApiService,
+    CachePageService,
+    Menu,
+  },
+})
