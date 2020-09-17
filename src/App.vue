@@ -22,32 +22,27 @@ export default {
     let that = this
     this.$plus(function() {
       let webview = window.plus.webview.currentWebview()
+      let first = null
       window.plus.key.addEventListener('backbutton', function() {
         if (that.hasCache) {
           that.clearCache()
         } else {
           webview.canBack(function(e) {
+            that.$toast('111')
             if (e.canBack) {
               webview.back()
             } else {
-              let first = null
-              window.plus.key.addEventListener(
-                'backbutton',
-                function() {
-                  if (!first) {
-                    first = new Date().getTime()
-                    that.$toast('再按一次退出')
-                    setTimeout(function() {
-                      first = null
-                    }, 1000)
-                  } else {
-                    if (new Date().getTime() - first < 1500) {
-                      window.plus.runtime.quit()
-                    }
-                  }
-                },
-                false,
-              )
+              if (!first) {
+                first = new Date().getTime()
+                that.$toast('再按一次退出')
+                setTimeout(function() {
+                  first = null
+                }, 1000)
+              } else {
+                if (new Date().getTime() - first < 1500) {
+                  window.plus.runtime.quit()
+                }
+              }
             }
           })
         }
