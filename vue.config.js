@@ -3,6 +3,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const DEV_URL = 'http://127.0.0.1'
 
 module.exports = {
+  lintOnSave: false,
   chainWebpack: config => {
     config.plugin('html').tap(args => {
       args[0].title = '加载中'
@@ -44,16 +45,9 @@ module.exports = {
             .split('/')
             .join('_')
           const mock = require(`./src/mock/${name}`)
-          const result = mock(req.method)
-          console.log(result)
+          let result = mock(req.method, req.query)
           delete require.cache[require.resolve(`./src/mock/${name}`)]
-          res.write(
-            JSON.stringify({
-              data: result,
-              code: 200,
-              msg: '',
-            }),
-          )
+          res.write(JSON.stringify(result))
           res.end()
           return false
         },

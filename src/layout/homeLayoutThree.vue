@@ -1,9 +1,7 @@
 <template>
   <div class="home-layout">
-    <header-one />
-    <sidebar-one />
+    <header-three />
     <router-view class="home-router" />
-    <footer-one />
   </div>
 </template>
 
@@ -17,7 +15,6 @@ export default {
 .home-router {
   width: 100%;
   overflow-y: auto;
-  margin-bottom: 13.333vw;
 }
 .home-layout {
   height: 100vh;

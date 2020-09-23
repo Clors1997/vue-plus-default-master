@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Qs from 'qs'
 
 // 基础路径
 const baseURL = '/api'
@@ -7,7 +8,8 @@ const instance = axios.create({
   baseURL,
   timeout: 16000,
   headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
+    // 'Content-Type': 'application/json;charset=UTF-8',
+    'Content-Type': 'application/x-www-form-urlencoded',
   },
 })
 
@@ -36,6 +38,7 @@ instance.interceptors.response.use(
  * @param {*} options
  */
 const request = (options = {}) => {
+  console.log(options, 'api')
   return new Promise((resolve, reject) => {
     instance(options)
       .then(({ data, code, msg }) => {
@@ -83,15 +86,20 @@ const put = (url, data = {}) => {
   return request({
     url,
     method: 'put',
-    data,
+    data: Qs.stringify(data),
   })
 }
 
 const post = (url, data = {}) => {
+  console.log({
+    url,
+    method: 'post',
+    data: Qs.stringify(data),
+  })
   return request({
     url,
     method: 'post',
-    data,
+    data: Qs.stringify(data),
   })
 }
 
@@ -99,7 +107,7 @@ const del = (url, data = {}) => {
   return request({
     url,
     method: 'delete',
-    data,
+    data: Qs.stringify(data),
   })
 }
 

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <home-grid :data="gridData" />
     <van-list>
       <van-cell
         title="点击使用confirm装饰器"
@@ -27,6 +28,20 @@ export default {
   data() {
     return {
       currentDate: format(new Date(), DATE_FMT),
+      gridData: [
+        [
+          { name: '练手速  ', routerName: 'down' },
+          { name: 'WebGl', routerName: 'webgl' },
+          { name: 'test' },
+          { name: 'test' },
+        ],
+        [
+          { name: 'test' },
+          { name: 'test' },
+          { name: 'test' },
+          { name: 'test' },
+        ],
+      ],
     }
   },
   created() {
@@ -47,9 +62,9 @@ export default {
       try {
         console.log(
           await this.$store.dispatch('apiFactory', {
-            api_key: 'example/test',
+            api_key: 'example/token',
             data: {
-              test: '123456',
+              token: 'AAAAA',
             },
           }),
         )

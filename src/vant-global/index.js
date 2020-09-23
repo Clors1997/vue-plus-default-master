@@ -14,6 +14,7 @@ import {
   Sticky,
   PullRefresh,
   Slider,
+  field,
 } from 'vant'
 const vantUses = [
   Popup,
@@ -32,6 +33,7 @@ const vantUses = [
   PullRefresh,
   Sticky,
   Slider,
+  field,
 ]
 export default {
   install(Vue) {

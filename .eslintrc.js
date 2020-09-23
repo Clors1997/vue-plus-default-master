@@ -95,9 +95,9 @@ module.exports = {
       argsIgnorePattern: 'h'
     }],
     // 行注释必须在行上面
-    "line-comment-position":['error',{"position": "above" }],
+    "line-comment-position":['warn',{"position": "above" }],
     // 一个函数最多能指定4个参数
-    "max-params":['error',{max:4}],
+    "max-params":['warn',{max:4}],
     // 构造函数必须首字母大写
     // "new-cap":['error', {"newIsCap": true} ],
     // vue 属性顺序

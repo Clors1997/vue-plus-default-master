@@ -7,4 +7,15 @@ export default {
       }
     },
   },
+  token: {
+    url: '/token',
+    params: data => {
+      console.log({
+        ...data,
+      })
+      return {
+        ...data,
+      }
+    },
+  },
 }

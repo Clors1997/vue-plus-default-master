@@ -69,9 +69,11 @@ export default {
       this.changeSideBar(false)
     },
     change(active) {
-      this.$router.replace({ name: this.menu[active].routerName })
       this.changeSideBar(false)
-      this.changeActive(active)
+      setTimeout(() => {
+        this.$router.replace({ name: this.menu[active].routerName })
+        this.changeActive(active)
+      }, 300)
     },
   },
 }
@@ -93,7 +95,7 @@ export default {
       line-height: 36px;
     }
     .van-cell::after {
-      border-bottom: 3px solid #fff;
+      border-bottom: 3px solid #777;
     }
   }
   .footer-close {

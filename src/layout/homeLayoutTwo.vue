@@ -1,6 +1,6 @@
 <template>
   <div class="home-layout">
-    <header-one />
+    <header-two />
     <sidebar-one />
     <router-view class="home-router" />
     <footer-one />

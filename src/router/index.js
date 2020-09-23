@@ -1,7 +1,10 @@
 import Vue from 'vue'
+import store from '../store'
 import VueRouter from 'vue-router'
 
+import Login from '@/views/login/index.vue'
 import Home from '@/layout/homeLayout.vue'
+import HomeTwo from '@/layout/homeLayoutTwo.vue'
 
 const originalPush = VueRouter.prototype.push
 const originalReplace = VueRouter.prototype.replace
@@ -19,7 +22,15 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/home-layout',
+    redirect: '/login',
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    meta: {
+      title: '登录',
+    },
   },
   {
     path: '/home-layout',
@@ -39,6 +50,17 @@ const routes = [
           transitionName: 'none',
         },
       },
+    ],
+  },
+  {
+    path: '/home-layout-two',
+    name: 'HomeLayoutTwo',
+    component: HomeTwo,
+    redirect: '/home-layout-two/search',
+    meta: {
+      title: '首页-其他',
+    },
+    children: [
       {
         path: 'search',
         name: 'search',
@@ -64,6 +86,33 @@ const routes = [
         meta: {
           title: '首页-设置',
           transitionName: 'none',
+        },
+      },
+    ],
+  },
+  {
+    path: '/home-layout-three',
+    name: 'HomeLayoutThree',
+    component: () => import('@/layout/homeLayoutThree'),
+    redirect: '/home-layout-three/down',
+    meta: {
+      title: '首页-其他',
+    },
+    children: [
+      {
+        path: 'down',
+        name: 'down',
+        component: () => import('@/views/down'),
+        meta: {
+          title: '首页-俯卧撑',
+        },
+      },
+      {
+        path: 'webgl',
+        name: 'webgl',
+        component: () => import('@/views/webgl'),
+        meta: {
+          title: '首页-WebGL',
         },
       },
     ],
@@ -99,6 +148,14 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title
+  if (to.path !== '/login') {
+    if (!localStorage.token) {
+      return next('/admin/login')
+    } else if (store.getters.getStorage('token') != localStorage.token) {
+      store.commit('setStorage', { key: 'token', value: localStorage.token })
+      //重新获取info
+    }
+  }
   next()
 })
 
